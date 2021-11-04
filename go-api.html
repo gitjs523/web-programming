@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head> </head>
+    <body>
+        <ul id="centerList">
+            
+        </ul>
+            
+        <script>
+            const baseUrl = "https://api.odcloud.kr/api";
+            const apiUrl = "/15077586/v1/centers";
+            const serviceKey = "jKE4PSGTX%2BfT1IRDXaoKcj%2B2YbAJUXcPeAAWBWc1HBtALmGKH3cte2V9i%2BOrO7Yhl0tNbRB8eOp%2FAv9SFfjoag%3D%3D";
+
+            fetch(baseUrl + apiUrl + "?serviceKey=" + serviceKey)
+              .then((response) => response.json())
+              .then((json) => {
+                  for (let i = 0; i < json.data.length; i++) {
+                    // <li>ooo 접종센터</li>
+                    // const li = '<li>' + json.data[i].facilityName + '(' + json.data[i].address + ')' + '</li>';
+                    const center = json.data[i];
+                    const li = '<li>시설명: ${center.facilityName}, 주소: (${center.zipCode})${center.address} </li>';
+                    document.querySelector("#centerList").innerHTML += li;
+                  }
+              });
+        </script>
+    </body>
+</html>
